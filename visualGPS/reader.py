@@ -27,11 +27,10 @@ class FileReaderController(Reader):
         Get frames iteratively, one at a time
         """
         with open(self.filename, "rb") as self.binary_file:
-            start_of_frame = self.seek_next_sync_bytes_pos(self.current_frame_pos)
-            end_of_frame = self.seek_next_sync_bytes_pos(start_of_frame+self.num_sync_bytes)
-
-        self.current_frame_pos = end_of_frame
-        print(start_of_frame, end_of_frame)
+            start_of_frame = self._seek_next_sync_bytes_pos(self.current_frame_pos)
+            end_of_frame = self._seek_next_sync_bytes_pos(start_of_frame+self.num_sync_bytes)
+            self.binary_file.seek(start_of_frame)
+            return self.binary_file.read(end_of_frame-start_of_frame)
 
     def _seek_next_sync_bytes_pos(self, start_position):
         """
