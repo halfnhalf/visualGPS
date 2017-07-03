@@ -1,1 +1,1 @@
-sync_bytes: "\xAA\x44\x12"
+sync_bytes: ["aa", "44", "12"]
