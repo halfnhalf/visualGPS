@@ -8,6 +8,7 @@ class Reader():
         self.configfile = configfile
         self.sync_bytes_list = yaml.load(open(configfile, 'r'))['sync_bytes']
         self.sync_bytes_list = [bytes.fromhex(x) for x in self.sync_bytes_list]
+        self.num_sync_bytes = len(self.sync_bytes_list)
         self.current_frame_pos = 0
 
 
@@ -20,7 +21,6 @@ class FileReaderController(Reader):
     def __init__(self, filename, configfile):
         super(FileReaderController, self).__init__(configfile)
         self.filename = filename
-        self.num_sync_bytes = len(self.sync_bytes_list)
 
     def get_frame(self):
         """
