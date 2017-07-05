@@ -1,1 +1,5 @@
 sync_bytes: ["aa", "44", "12"]
+content:
+  header_length: 
+    offset: 3
+    size: 1
