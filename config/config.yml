@@ -1,5 +1,41 @@
 sync_bytes: ["aa", "44", "12"]
-content:
-  header_length: 
+header_structure:
+  - name: header_length
     offset: 3
     size: 1
+  - name: message_id
+    offset: 4
+    size: 2
+  - name: message_type
+    offset: 6
+    size: 1
+  - name: port_address
+    offset: 7
+    size: 1
+  - name: message_length
+    offset: 8
+    size: 2
+  - name: sequence
+    offset: 10
+    size: 2
+  - name: idle_time
+    offset: 12
+    size: 1
+  - name: time_status
+    offset: 13
+    size: 1
+  - name: week
+    offset: 14
+    size: 2
+  - name: ms
+    offset: 16
+    size: 4
+  - name: receiver_status
+    offset: 20
+    size: 4
+  - name: reserved
+    offset: 24
+    size: 2
+  - name: receiver_s/w_version
+    offset: 26
+    size: 2
