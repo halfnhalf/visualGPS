@@ -1,2 +1,8 @@
-[ ] implement data parser now that we have frames
-[x] capture frames from files
+parser:
+  ✔ implement header structure parser @done (17-07-07 18:01)
+    do we need to check the header structure each frame or just the first? Obviously we need to check for errors
+  ☐ implement content parser @created(17-07-07 18:11)
+    how do we specify in the config how to format data?
+reader:
+  ✔ implement file reader @done (17-07-07 18:01)
+  ☐ implement com reader
