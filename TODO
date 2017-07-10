@@ -1,10 +1,14 @@
 parser:
-  ☐ implement header structure parser
-    ✔ import header structure data with offset and size @done (17-07-07 01:15)
-    ☐ encode header structure data @created(17-07-10 01:15)
-    do we need to check the header structure each frame or just the first? Obviously we need to check for errors
   ☐ implement content parser @created(17-07-07 18:11)
     how do we specify in the config how to format data?
 reader:
-  ✔ implement file reader @done (17-07-07 18:01)
-  ☐ implement com reader
+  ✔ implement FileReaderController @done (17-07-07 18:01)
+  ☐ implement ComReaderController
+  ☐ implement header structure into reader @created(17-07-10 16:46)
+    we're removing the header structure from the parser since it makes more sense to be in the reader as the reader is static
+  ☐ implement header structure parser
+    do we need to check the header structure each frame or just the first? Obviously we need to check for errors
+    ✔ import header structure data with offset and size @done (17-07-07 01:15)
+    ☐ encode header structure data @created(17-07-10 01:15) @started(17-07-10 17:54)
+      ✔ create function to decode field data with encode string @done (17-07-10 18:26)
+      ☐ finish adding and testing encoded fields @created(17-07-10 18:28) @started(17-07-10 18:28) @toggle(17-07-10 18:28)

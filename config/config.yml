@@ -27,6 +27,7 @@ header_structure:
   - name: week
     offset: 14
     size: 2
+    encode: int
   - name: ms
     offset: 16
     size: 4

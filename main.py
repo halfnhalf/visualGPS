@@ -8,8 +8,15 @@ def main():
     config = os.path.join(dir, 'config', 'config.yml')
     datafile = os.path.join(dir, 'data', '1950_5_01_L627_OMNI_0.GPS')
     filereader = FileReaderController(datafile, config)
-    parser = Parser(config)
-    parser.parse_frame(filereader.get_frame())
+
+    filereader.parse_frame_header(filereader.get_frame())
+    print(filereader.header_structure)
+    filereader.parse_frame_header(filereader.get_frame())
+    print(filereader.header_structure)
+    filereader.parse_frame_header(filereader.get_frame())
+    print(filereader.header_structure)
+    filereader.parse_frame_header(filereader.get_frame())
+    print(filereader.header_structure)
 
 if __name__ == "__main__":
     main()
