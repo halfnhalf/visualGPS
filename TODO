@@ -1,5 +1,7 @@
 parser:
-  ✔ implement header structure parser @done (17-07-07 18:01)
+  ☐ implement header structure parser
+    ✔ import header structure data with offset and size @done (17-07-07 01:15)
+    ☐ encode header structure data @created(17-07-10 01:15)
     do we need to check the header structure each frame or just the first? Obviously we need to check for errors
   ☐ implement content parser @created(17-07-07 18:11)
     how do we specify in the config how to format data?
