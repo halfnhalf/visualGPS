@@ -1,14 +1,32 @@
-parser:
-  ☐ implement content parser @created(17-07-07 18:11)
-    how do we specify in the config how to format data?
-reader:
-  ✔ implement FileReaderController @done (17-07-07 18:01)
-  ☐ implement ComReaderController
-  ☐ implement header structure into reader @created(17-07-10 16:46)
-    we're removing the header structure from the parser since it makes more sense to be in the reader as the reader is static
-  ☐ implement header structure parser
-    do we need to check the header structure each frame or just the first? Obviously we need to check for errors
-    ✔ import header structure data with offset and size @done (17-07-07 01:15)
-    ☐ encode header structure data @created(17-07-10 01:15) @started(17-07-10 17:54)
-      ✔ create function to decode field data with encode string @done (17-07-10 18:26)
-      ☐ finish adding and testing encoded fields @created(17-07-10 18:28) @started(17-07-10 18:28) @toggle(17-07-10 18:28)
+visualGPS:
+    ☐ figure out a unit testing framework @created(17-07-11 15:23)
+    ☐ add rest docstrings to classes and functions @created(17-07-11 15:23)
+    parser:
+        ☐ implement content parser @created(17-07-07 18:11) @started(17-07-11 14:49)
+            how do we specify in the config how to format data?
+            ✔ think of way to grab payload from reader module @done (17-07-11 14:44)
+                perhaps we should have parser call a reader function with parameters to grab the data
+                yes this sounds good
+            ✔ implement ability to interpret header structure and determine payload size and position @created(17-07-11 14:45) @started(17-07-11 14:49) @done (17-07-11 19:14) @lasted(4:25)
+                payload is a pretty generic thing so maybe this should be part of the parser super class. We'll have a propak6 child class
+                ✔ implement config file payload size and offset @created(17-07-11 14:50) @started(17-07-11 14:50) @done (17-07-11 16:59) @lasted(2:09)
+                ✔ figure out a way to reconcile dependency between parser and reader @created(17-07-11 16:30) @started(17-07-11 16:30) @done (17-07-11 19:14) @lasted(2:44)
+                    for now im just going to get the frame from file reader and then call digest_data with ProPak6 after setting up the header structure
+            ☐ digest data @created(17-07-11 19:18) @started(17-07-11 19:18)
+                ☐ determine message_id, message_type, where the message is @created(17-07-11 19:30)
+
+    reader:
+        ✔ implement FileReaderController @done (17-07-07 18:01)
+        ☐ implement ComReaderController
+        ✔ implement header structure into reader @created(17-07-10 16:46) @done (17-07-11 14:34)
+            we're removing the header structure from the parser since it makes more sense to be in the reader as the reader is static
+        ✔ implement header structure parser @done (17-07-11 14:43)
+            do we need to check the header structure each frame or just the first? Obviously we need to check for errors
+            ✔ import header structure data with offset and size @done (17-07-07 01:15)
+            ✔ encode header structure data @created(17-07-10 01:15) @started(17-07-10 17:54) @done (17-07-11 14:42) @lasted(20:48)
+                ✔ create function to decode field data with encode string @done (17-07-10 18:26)
+                ✔ finish adding and testing encoded fields @created(17-07-10 18:28) @started(17-07-11 13:51) @done (17-07-11 14:42) @lasted(0:51)
+        tests:
+            ☐ test header structure @created(17-07-11 15:23)
+                to do this we need to have our own canned binary string and just test that we can pull out elements. also need a canned config file
+                ☐ create canned binary data and canned config string @created(17-07-11 15:23)

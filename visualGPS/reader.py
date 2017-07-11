@@ -29,7 +29,7 @@ class Reader():
         self.header_structure = {}
         self.current_frame_pos = 0
 
-    def parse_frame_header(self, frame_data):
+    def digest_frame_header(self, frame_data):
         self.frame_data = frame_data
 
         for field in self.content:
