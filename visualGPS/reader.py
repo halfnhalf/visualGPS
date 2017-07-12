@@ -1,5 +1,6 @@
 import yaml
 import sys
+from abc import abstractmethod
 
 _NUM_BYTES_TO_READ = 1
 _CONFIG_HEADER_KEY = 'header_structure'
@@ -53,6 +54,11 @@ class Reader():
 
         return decoded_data
 
+    @abstractmethod
+    def get_frame(self):
+        raise NotImplementedError()
+
+
 class FileReaderController(Reader):
     """
     This class is used to read binary gps data from a file
@@ -78,7 +84,11 @@ class FileReaderController(Reader):
             end_of_frame = self._seek_next_sync_bytes_pos(start_of_frame+self.num_sync_bytes)
             self.binary_file.seek(start_of_frame)
             self.current_frame_pos = end_of_frame
-            return self.binary_file.read(end_of_frame-start_of_frame)
+            frame = self.binary_file.read(end_of_frame-start_of_frame)
+
+            self.digest_frame_header(frame)
+
+            return frame
 
     def _seek_next_sync_bytes_pos(self, start_position):
         """

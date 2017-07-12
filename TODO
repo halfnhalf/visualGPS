@@ -1,6 +1,13 @@
 visualGPS:
     ☐ figure out a unit testing framework @created(17-07-11 15:23)
     ☐ add rest docstrings to classes and functions @created(17-07-11 15:23)
+    ☐ create VisualGPS factory class @created(17-07-12 18:36)
+        create a factory class to register parser and readers to.
+        after registering a reader and parser class the module wil create objects of expected types
+        and bind them together essentially.
+        ☐ have the register function accept a class and specify a role somehow @created(17-07-12 18:40)
+            ✔ how should we specify roles? think of a way with either strings or class name. @done (17-07-12 18:39)
+                were going to check super class
     parser:
         ☐ implement content parser @created(17-07-07 18:11) @started(17-07-11 14:49)
             how do we specify in the config how to format data?
@@ -14,7 +21,9 @@ visualGPS:
                     for now im just going to get the frame from file reader and then call digest_data with ProPak6 after setting up the header structure
             ☐ digest data @created(17-07-11 19:18) @started(17-07-11 19:18)
                 ☐ determine message_id, message_type, where the message is @created(17-07-11 19:30)
-
+            ✔ i don't like initiating the parser object with header structure because we would need a new one each frame. @created(17-07-12 15:05) @started(17-07-12 15:26) @done (17-07-12 18:17) @lasted(2:51)
+            ✘ were going to create a register and factory possibly for the parser @created(17-07-12 16:54) @cancelled (17-07-12 18:40)
+                this is now being done at the root of the visualgps module with a factory class
     reader:
         ✔ implement FileReaderController @done (17-07-07 18:01)
         ☐ implement ComReaderController
