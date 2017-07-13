@@ -25,4 +25,4 @@ class ProPak6(Parser):
 
     def parse_data(self, frame, header_structure):
         self.payload_size = header_structure[self.payload_size_header_key]
-        self.paylaod = frame[self.payload_offset:self.payload_offset+self.payload_size]
+        self.payload = frame[self.payload_offset:self.payload_offset+self.payload_size]

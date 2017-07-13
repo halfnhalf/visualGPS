@@ -1,13 +1,17 @@
 visualGPS:
     ☐ figure out a unit testing framework @created(17-07-11 15:23)
     ☐ add rest docstrings to classes and functions @created(17-07-11 15:23)
-    ☐ create VisualGPS factory class @created(17-07-12 18:36)
+    ☐ create VisualGPS IOC class @created(17-07-12 18:36) @started(17-07-13 12:00)
         create a factory class to register parser and readers to.
         after registering a reader and parser class the module wil create objects of expected types
         and bind them together essentially.
-        ☐ have the register function accept a class and specify a role somehow @created(17-07-12 18:40)
+        ✔ have the register function accept a class and specify a role somehow @created(17-07-12 18:40) @started(17-07-13 15:21) @done (17-07-13 18:56) @lasted(3:35)
             ✔ how should we specify roles? think of a way with either strings or class name. @done (17-07-12 18:39)
                 were going to check super class
+        ✔ figure out why get_frame is saying self.parser doesn't have a payload attribute @created(17-07-13 18:58) @done (17-07-13 18:59)
+        ☐ add more functionality to this class such as when reading a file get stats of the whole file @created(17-07-13 19:01)
+        ☐ figure out a way to handle real time data. @created(17-07-13 19:03)
+            were going to call a get_frame function from comreader which will pause the calling thread till it has received a full frame over serial.
     parser:
         ☐ implement content parser @created(17-07-07 18:11) @started(17-07-11 14:49)
             how do we specify in the config how to format data?
@@ -39,3 +43,5 @@ visualGPS:
             ☐ test header structure @created(17-07-11 15:23)
                 to do this we need to have our own canned binary string and just test that we can pull out elements. also need a canned config file
                 ☐ create canned binary data and canned config string @created(17-07-11 15:23)
+    TBI:
+        todo
