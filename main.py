@@ -18,6 +18,7 @@ def main():
     while True:
         input("press a key to get next frame")
         gps.get_frame()
+        #print(gps.reader.header_structure)
 
 if __name__ == "__main__":
     main()

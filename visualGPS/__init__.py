@@ -22,4 +22,3 @@ class VisualGPS():
     def get_frame(self):
         frame = self.reader.get_frame()
         self.parser.parse_data(frame, self.reader.header_structure)
-        print(self.parser.payload)

@@ -24,7 +24,8 @@ visualGPS:
                 ✔ figure out a way to reconcile dependency between parser and reader @created(17-07-11 16:30) @started(17-07-11 16:30) @done (17-07-11 19:14) @lasted(2:44)
                     for now im just going to get the frame from file reader and then call digest_data with ProPak6 after setting up the header structure
             ☐ digest data @created(17-07-11 19:18) @started(17-07-11 19:18)
-                ☐ determine message_id, message_type, where the message is @created(17-07-11 19:30)
+                ☐ determine message_id, message_type, where the message is @created(17-07-11 19:30) @started(17-07-14 12:54)
+                    message_id of 38, 73, 75 is correct
             ✔ i don't like initiating the parser object with header structure because we would need a new one each frame. @created(17-07-12 15:05) @started(17-07-12 15:26) @done (17-07-12 18:17) @lasted(2:51)
             ✘ were going to create a register and factory possibly for the parser @created(17-07-12 16:54) @cancelled (17-07-12 18:40)
                 this is now being done at the root of the visualgps module with a factory class
@@ -39,6 +40,9 @@ visualGPS:
             ✔ encode header structure data @created(17-07-10 01:15) @started(17-07-10 17:54) @done (17-07-11 14:42) @lasted(20:48)
                 ✔ create function to decode field data with encode string @done (17-07-10 18:26)
                 ✔ finish adding and testing encoded fields @created(17-07-10 18:28) @started(17-07-11 13:51) @done (17-07-11 14:42) @lasted(0:51)
+        ✘ Should we use bytearray rather than byte strings? @cancelled (17-07-14 16:13)
+            it would actually be the same speed as using bytearray since were not appending to an existing byte string. Were just reading byte strings from a file. The byte string would have to be converted to a bytearray anyway so it's probably faster to just use the byte string. We'll use a bytearray in the future if we need to mutate it (like sending commands)
+            We can't use numpy.fromfile because the frame structure isn't known until we get the header of the frame.
         tests:
             ☐ test header structure @created(17-07-11 15:23)
                 to do this we need to have our own canned binary string and just test that we can pull out elements. also need a canned config file
