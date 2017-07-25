@@ -21,6 +21,7 @@ class Parser():
         """
         raise NotImplementedError()
 
+
 class ProPak6(Parser):
     def __init__(self, configfile):
         super(ProPak6, self).__init__(configfile)

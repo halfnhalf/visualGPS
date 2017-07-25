@@ -48,5 +48,15 @@ visualGPS:
             ☐ test header structure @created(17-07-11 15:23)
                 to do this we need to have our own canned binary string and just test that we can pull out elements. also need a canned config file
                 ☐ create canned binary data and canned config string @created(17-07-11 15:23)
-    TBI:
-        todo
+    TUI:
+        ✔ what framework do we want to use for this? @created(17-07-17 16:27) @started(17-07-17 16:27) @toggle(17-07-17 19:00) @toggle(17-07-18 14:58) @done (17-07-18 15:49) @lasted(3:24)
+            there's ncurses, curses, uriwd, asciimatics
+            asciimatics uses layouts and widgets but ncurses and urwid is procedural so we'll use asciimatics
+        ☐ display header structure @created(17-07-17 13:57) @started(17-07-18 15:49) @toggle(17-07-21 17:14) @toggle(17-07-24 12:15)
+            we'll start with just a window of fields to display header structure
+            ✔ figure out how to initialize a window and display text @created(17-07-24 12:15) @started(17-07-24 12:15) @done (17-07-25 15:00) @lasted(1 day, 2:45)
+                ✔ solve 2 parameters bug @created(17-07-24 19:03) @started(17-07-24 19:04) @done (17-07-25 15:00) @lasted(19:56)
+            ☐ figure out how to pull information from python dict into asciimatics @created(17-07-25 15:01) @started(17-07-25 15:01)
+            ☐ display the information @created(17-07-25 15:01)
+            ☐ make it pretty @created(17-07-25 15:01)
+            ☐ add buttons to get the next frame @created(17-07-25 15:01)
