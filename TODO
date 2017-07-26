@@ -24,12 +24,13 @@ visualGPS:
                 ✔ figure out a way to reconcile dependency between parser and reader @created(17-07-11 16:30) @started(17-07-11 16:30) @done (17-07-11 19:14) @lasted(2:44)
                     for now im just going to get the frame from file reader and then call digest_data with ProPak6 after setting up the header structures
             ☐ digest data @created(17-07-11 19:18) @started(17-07-11 19:18)
-                ☐ determine message_id, message_type, where the message is @created(17-07-11 19:30) @started(17-07-14 12:54) @toggle(17-07-14 18:08)
-                    message_id of 38, 73, 75, is what's in the data but these aren't in the spec
+                ✔ determine message_id, message_type, where the message is @created(17-07-11 19:30) @started(17-07-14 12:54) @toggle(17-07-14 18:08) @done (17-07-26 14:19) @lasted(5:14)
+                    message_id of 38, 73, 75, is what's in the data but these aren't in the spec. Oh wait they are and you need to look in the data log tables
                 ☐ determine what the payload means @created(17-07-14 18:08)
+                    see data log reference page
             ✔ i don't like initiating the parser object with header structure because we would need a new one each frame. @created(17-07-12 15:05) @started(17-07-12 15:26) @done (17-07-12 18:17) @lasted(2:51)
             ✘ were going to create a register and factory possibly for the parser @created(17-07-12 16:54) @cancelled (17-07-12 18:40)
-                this is now being done at the root of the visualgps module with a factory class
+                this is now being done at the root of the visualgps module with a IOC class
     reader:
         ✔ implement FileReaderController @done (17-07-07 18:01)
         ☐ implement ComReaderController
@@ -56,7 +57,10 @@ visualGPS:
             we'll start with just a window of fields to display header structure
             ✔ figure out how to initialize a window and display text @created(17-07-24 12:15) @started(17-07-24 12:15) @done (17-07-25 15:00) @lasted(1 day, 2:45)
                 ✔ solve 2 parameters bug @created(17-07-24 19:03) @started(17-07-24 19:04) @done (17-07-25 15:00) @lasted(19:56)
-            ☐ figure out how to pull information from python dict into asciimatics @created(17-07-25 15:01) @started(17-07-25 15:01)
-            ☐ display the information @created(17-07-25 15:01)
+            ✔ figure out how to pull information from python dict into asciimatics @created(17-07-25 15:01) @started(17-07-25 15:01) @done (17-07-26 14:18) @lasted(23:17)
+                we'll probably just pass the visualgps ioc container
+            ✔ display the information @created(17-07-25 15:01) @started(Wed Jul-26-17 16:24) @done (Wed Jul-26-17 18:48) @lasted(2:24)  
+                ✔ we need to create enumerated tuples of the header information @created(17-07-26 16:24) @started(Wed Jul-26-17 16:24) @done (Wed Jul-26-17 18:48) @lasted(2:24)
             ☐ make it pretty @created(17-07-25 15:01)
-            ☐ add buttons to get the next frame @created(17-07-25 15:01)
+            ✔ add buttons to get the next frame @created(17-07-25 15:01) @done (Wed Jul-26-17 18:48)
+                ☐ figure out how to update the display @created(17-07-25 17:00) @started(17-07-26 15:19) @toggle(17-07-26 16:24) @toggle(Wed Jul-26-17 18:49)

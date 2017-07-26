@@ -47,10 +47,6 @@ header_structure:
     offset: 26
     size: 2
     encode: int
-  - name: response_id
-    offset: 28
-    size: 4
-    encode: int
 payload:
   size_from_header_field: message_length
   offset: 32

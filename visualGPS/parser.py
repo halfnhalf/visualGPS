@@ -1,7 +1,6 @@
 import yaml
 import sys
 from abc import abstractmethod
-from visualGPS.reader import _CONFIG_HEADER_KEY
 
 _PAYLOAD_KEY = "payload"
 _PAYLOAD_SIZE_KEY = "size_from_header_field"
@@ -18,6 +17,8 @@ class Parser():
     def parse_data(self, frame, header_structure):
         """
         this function needs to be implemented by a child class
+
+        :param frame: includes the header structure
         """
         raise NotImplementedError()
 
@@ -29,6 +30,3 @@ class ProPak6(Parser):
     def parse_data(self, frame, header_structure):
         self.payload_size = header_structure[self.payload_size_header_key]
         self.payload = frame[self.payload_offset:self.payload_offset+self.payload_size]
-
-        if(header_structure["response_id"] == 38):
-            print("unknown status")
