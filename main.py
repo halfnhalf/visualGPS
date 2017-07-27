@@ -19,7 +19,7 @@ def main():
 #        input("press a key to get next frame")
 #        gps.get_frame()
 #        print(gps.reader.header_structure)
-    #gps.get_frame()
+    gps.get_frame()
     #list_of_tuples = [(''.join(x), 1) for x in list_items]
     #print(list_of_tuples)
     start_tui(gps)

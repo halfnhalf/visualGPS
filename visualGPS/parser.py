@@ -26,7 +26,25 @@ class Parser():
 class ProPak6(Parser):
     def __init__(self, configfile):
         super(ProPak6, self).__init__(configfile)
+        self.message_enum = "None"
+        self.frame_count = 0
 
     def parse_data(self, frame, header_structure):
         self.payload_size = header_structure[self.payload_size_header_key]
         self.payload = frame[self.payload_offset:self.payload_offset+self.payload_size]
+        message_id = header_structure["message_id"]
+
+        if message_id == 43:
+            self.message_enum = "range"
+        elif message_id == 25:
+            self.message_enum = "raw gps subframe"
+        elif message_id == 973:
+            self.message_enum = "raw sbas subframe"
+        elif message_id == 1306:
+            self.message_enum = "unkown"
+        elif message_id == 41:
+            self.message_enum = "raw ephemeris data"
+        else:
+            self.message_enum = "None"
+
+        self.frame_count += 1
