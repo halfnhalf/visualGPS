@@ -34,9 +34,9 @@ class Reader():
         self.frame_data = frame_data
 
         for field in self.content:
-            self.header_structure[field[_CONFIG_NAME_KEY]] = self._get_field_data(field)
+            self.header_structure[field[_CONFIG_NAME_KEY]] = self.get_field_data(field, self.frame_data)
 
-    def _get_field_data(self, field):
+    def get_field_data(self, field, frame_data):
         offset = field[_CONFIG_OFFSET_KEY]
         size = field[_CONFIG_SIZE_KEY]
         encode = field[_ENCODE_KEY] if _ENCODE_KEY in field else None

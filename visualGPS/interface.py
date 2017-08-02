@@ -20,11 +20,15 @@ class HeaderView(Frame):
                                     [(self.gps_controller.parser.message_enum, 0)])
         self.frame_count_list = ListBox(1,
                                          [(str(self.gps_controller.parser.frame_count), 0)])
+        self.payload_data = ListBox(1,
+                                         [(str(self.gps_controller.parser.payload_data["#ofobservers"]), 0)])
         self.layout.add_widget(self.header_list)
         self.layout.add_widget(Divider())
         self.layout.add_widget(self.payload_list)
         self.layout.add_widget(Divider())
         self.layout.add_widget(self.frame_count_list)
+        self.layout.add_widget(Divider())
+        self.layout.add_widget(self.payload_data)
         self.layout.add_widget(Divider())
         self.layout.add_widget(Button("next frame", self._next_frame))
         self.fix()
@@ -34,6 +38,7 @@ class HeaderView(Frame):
         self.header_list.options = self._convert_dict_to_options(self.gps_controller.reader.header_structure)
         self.payload_list.options = [(self.gps_controller.parser.message_enum, 0)]
         self.frame_count_list.options = [(str(self.gps_controller.parser.frame_count), 0)]
+        self.payload_data.options = [(str(self.gps_controller.parser.payload_data["#ofobservers"]), 0)]
 
     def _convert_dict_to_options(self, dict):
         list_items = dict.items()
