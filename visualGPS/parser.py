@@ -16,11 +16,9 @@ class Parser():
         self.payload_structure = self.configfile[_PAYLOAD_KEY]
         self.payload_offset = self.payload_structure[_PAYLOAD_OFFSET_KEY]
         self.payload_size_header_key = self.payload_structure[_PAYLOAD_SIZE_KEY]
+        self.messages = self.payload_structure[_MESSAGES_KEY]
 
         self.frame_count = 0
-
-    def _create_messages_structure(self):
-        self.messages = self.payload_structure["_MESSAGES_KEY"]
 
     @abstractmethod
     def parse_data(self, frame, header_structure):
@@ -41,16 +39,11 @@ class ProPak6(Parser):
         self.payload_size = header_structure[self.payload_size_header_key]
         self.payload = frame[self.payload_offset:self.payload_offset+self.payload_size]
         self.payload_data = {}
-        self.message_structure = {}
         message_id = header_structure[_MESSAGE_ID_KEY]
-        self.messages = self.payload_structure[_MESSAGES_KEY]
 
-        self.payload_data["#ofobservers"] = 0
-
+        self.message_enum = self.messages[_MESSAGE_ID_KEY][message_id]["name"]
         if message_id == 43:
-
-            self.payload_data["message_enum"]= "range"
-            self.payload_data["#ofobservers"] = Reader.get_field_data(self, self.messages[0]["fields"][0], self.payload)
+            self.payload_data["#ofobservers"] = 0
         elif message_id == 25:
             self.message_enum = "raw gps subframe"
         elif message_id == 973:
