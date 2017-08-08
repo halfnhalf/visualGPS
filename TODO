@@ -34,14 +34,20 @@ visualGPS:
                     ✔ decide how to construct the config payload @created(Fri Jul-28-17 14:48) @started(Fri Jul-28-17 14:48) @done (Fri Jul-28-17 17:43) @lasted(2:55)
                     ☐ 43 range @created(Wed Jul-26-17 19:14)
                         ☐ figure out a way to account for all the observers in the config file @created(Mon Jul-31-17 18:59) @started(Mon Jul-31-17 18:59) @toggle(Wed Aug-02-17 14:35)
-                        ☐ implement basic parsing of 1 range field @created(Wed Aug-02-17 14:36) @started(Wed Aug-02-17 14:45) @toggle(Wed Aug-02-17 15:15)
+                        ✔ implement basic parsing of 1 range field @created(Wed Aug-02-17 14:36) @started(Wed Aug-02-17 14:45) @done (Tue Aug-08-17 18:24) @lasted(6 days, 3:39)
                     ☐ 25 rawgpssubframe @created(Wed Jul-26-17 19:22)
+                        ☐ add this to config
                     ☐ 973 rawsbassubframe @created(Wed Jul-26-17 19:22)
+                        ☐ add this to config
                     ☐ 1306 unkown @created(Wed Jul-26-17 19:23)
+                        ☐ add this to config
                     ☐ 41 rawephm @created(Wed Jul-26-17 19:25)
+                        ☐ add this to config
                 ☐ decide what realtime data is important and needs to be aggregated @created(Wed Jul-26-17 19:58)
+                    such as ranging data or whatever
                 ☐ move the important information to display to the super class @created(Wed Jul-26-17 20:00)
-            ☐ implement message structure when instantiating a new parser from the config file @created(Wed Aug-02-17 16:47) @started(Wed Aug-02-17 16:47)
+                    we need the overall super parser to aggregate the data from individual frames
+            ☐ implement message structure when instantiating a new parser from the config file @created(Wed Aug-02-17 16:47) @started(Wed Aug-02-17 16:47) 
             ✔ i don't like initiating the parser object with header structure because we would need a new one each frame. @created(17-07-12 15:05) @started(17-07-12 15:26) @done (17-07-12 18:17) @lasted(2:51)
             ✘ were going to create a register and factory possibly for the parser @created(17-07-12 16:54) @cancelled (17-07-12 18:40)
                 this is now being done at the root of the visualgps module with a IOC class
@@ -82,5 +88,7 @@ visualGPS:
         ☐ Display payload information @created(Wed Jul-26-17 19:12)
             ✔ Figure out best way to pass information from the parser to the ui @done (Wed Jul-26-17 19:59)
                 just use the gps controller and pull information from that. Most of the displat fields should probably be in the Parser super class
-        ☐ Display message enum @created(Wed Jul-26-17 19:12)
+        ✔ Display message enum @created(Wed Jul-26-17 19:12) @done (Tue Aug-08-17 18:25)
             The mesage enum comes from the data log sheet
+        ☐ figure out how we want to display the playback file information
+            number of logs and types of logs? what else is importnat?
