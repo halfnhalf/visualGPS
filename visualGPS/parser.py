@@ -1,6 +1,6 @@
 import yaml
 import sys
-from visualGPS import Reader
+from visualGPS.reader import Reader,_CONFIG_SIZE_KEY, _CONFIG_NAME_KEY, _SYNC_BYTES_KEY, _ENCODE_KEY 
 from abc import abstractmethod
 
 _PAYLOAD_KEY = "payload"
@@ -9,6 +9,8 @@ _PAYLOAD_OFFSET_KEY = "offset"
 
 _MESSAGES_KEY = "messages"
 _MESSAGE_ID_KEY = "message_id"
+_MESSAGE_FIELD_KEY = "fields"
+
 
 class Parser():
     def __init__(self, configfile):
@@ -35,24 +37,32 @@ class ProPak6(Parser):
         super(ProPak6, self).__init__(configfile)
         self.message_enum = "None"
 
-    def parse_data(self, frame, header_structure):
-        self.payload_size = header_structure[self.payload_size_header_key]
-        self.payload = frame[self.payload_offset:self.payload_offset+self.payload_size]
-        self.payload_data = {}
+    def parse_frame(self, frame, header_structure):
         message_id = header_structure[_MESSAGE_ID_KEY]
+        self.current_frame = {}
+        self.current_frame["message_enum"] = self.messages[message_id][_CONFIG_NAME_KEY]
+        self.current_frame["payload_size"] = header_structure[self.payload_size_header_key]
 
-        self.message_enum = self.messages[_MESSAGE_ID_KEY][message_id]["name"]
-        if message_id == 43:
-            self.payload_data["#ofobservers"] = 0
-        elif message_id == 25:
-            self.message_enum = "raw gps subframe"
-        elif message_id == 973:
-            self.message_enum = "raw sbas subframe"
-        elif message_id == 1306:
-            self.message_enum = "unkown"
-        elif message_id == 41:
-            self.message_enum = "raw ephemeris data"
-        else:
-            self.message_enum = "None"
+        payload = frame[self.payload_offset:self.payload_offset+self.current_frame["payload_size"]]
+        this_message_config = self.messages[message_id]
+
+        self.current_frame["payload_data"] = {}
+        for field in this_message_config[_MESSAGE_FIELD_KEY]:
+            self.current_frame["payload_data"][field[_CONFIG_NAME_KEY]] = Reader.get_field_data(self, field, payload)
+
+        print(self.current_frame["payload_data"])
+        print(header_structure)
+        #if message_id == 43:
+        #    self.payload_data["#ofobservers"] = 0
+        #elif message_id == 25:
+        #    self.message_enum = "raw gps subframe"
+        #elif message_id == 973:
+        #    self.message_enum = "raw sbas subframe"
+        #elif message_id == 1306:
+        #    self.message_enum = "unkown"
+        #elif message_id == 41:
+        #    self.message_enum = "raw ephemeris data"
+        #else:
+        #    self.message_enum = "None"
 
         self.frame_count += 1

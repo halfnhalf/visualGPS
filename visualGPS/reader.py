@@ -31,10 +31,8 @@ class Reader():
         self.current_frame_pos = 0
 
     def digest_frame_header(self, frame_data):
-        self.frame_data = frame_data
-
         for field in self.content:
-            self.header_structure[field[_CONFIG_NAME_KEY]] = self.get_field_data(field, self.frame_data)
+            self.header_structure[field[_CONFIG_NAME_KEY]] = self.get_field_data(field, frame_data)
 
     def get_field_data(self, field, frame_data):
         offset = field[_CONFIG_OFFSET_KEY]
@@ -42,9 +40,9 @@ class Reader():
         encode = field[_ENCODE_KEY] if _ENCODE_KEY in field else None
 
         if encode:
-            return self._decode_field_data(self.frame_data[offset:offset+size], encode)
+            return self._decode_field_data(frame_data[offset:offset+size], encode)
         else:
-            return self.frame_data[offset:offset+size]
+            return frame_data[offset:offset+size]
 
 
     def _decode_field_data(self, field_data, encode):
