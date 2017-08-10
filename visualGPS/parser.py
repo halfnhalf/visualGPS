@@ -47,8 +47,8 @@ class ProPak6(Parser):
         this_message_config = self.messages[message_id]
 
         self.current_frame["payload_data"] = {}
-        for field in this_message_config[_MESSAGE_FIELD_KEY]:
-            self.current_frame["payload_data"][field[_CONFIG_NAME_KEY]] = Reader.get_field_data(field, payload)
+        for field_name_key, field in this_message_config[_MESSAGE_FIELD_KEY].items():
+            self.current_frame["payload_data"][field_name_key] = Reader.get_field_data(field, payload)
 
         #if message_id == 43:
         #    self.payload_data["#ofobservers"] = 0

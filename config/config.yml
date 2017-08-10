@@ -54,41 +54,44 @@ payload:
     43:
       name: range
       fields:
-        - name: num_observers
+        num_observers:
           offset: 0
           size: 4
           encode: int
-        - name: prn
+        prn:
           offset: 4
           size: 2
           encode: int
-        - name: glofreq
+        glofreq:
           offset: 6
           size: 2
           encode: int
-        - name: psr
+        psr:
           offset: 8
           size: 8
-        - name: psr_std
+        psr_std:
           offset: 16
           size: 4
-        - name: adr
+        adr:
           offset: 20
           size: 8
-        - name: adr_std
+        adr_std:
           offset: 28
           size: 4
-        - name: dopp
+        dopp:
           offset: 32
           size: 4
-        - name: c_no
+        c_no:
           offset: 36
           size: 4
-        - name: locktime
+        locktime:
           offset: 40
           size: 4
           encode: int
-        - name: chtrstatus
+        chtrstatus:
           offset: 44
           size: 4
           encode: int
+    973:
+      name: raw_sbas_subframe
+      fields:
