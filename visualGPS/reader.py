@@ -32,20 +32,22 @@ class Reader():
 
     def digest_frame_header(self, frame_data):
         for field in self.content:
-            self.header_structure[field[_CONFIG_NAME_KEY]] = self.get_field_data(field, frame_data)
+            self.header_structure[field[_CONFIG_NAME_KEY]] = Reader.get_field_data(field, frame_data)
 
-    def get_field_data(self, field, frame_data):
+    @staticmethod
+    def get_field_data(field, frame_data):
         offset = field[_CONFIG_OFFSET_KEY]
         size = field[_CONFIG_SIZE_KEY]
         encode = field[_ENCODE_KEY] if _ENCODE_KEY in field else None
 
         if encode:
-            return self._decode_field_data(frame_data[offset:offset+size], encode)
+            return Reader._decode_field_data(frame_data[offset:offset+size], encode)
         else:
             return frame_data[offset:offset+size]
 
 
-    def _decode_field_data(self, field_data, encode):
+    @staticmethod
+    def _decode_field_data(field_data, encode):
         decoded_data = {
             'int': lambda x: int.from_bytes(x, byteorder=sys.byteorder)
         }[encode](field_data)

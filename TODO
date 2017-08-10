@@ -65,6 +65,7 @@ visualGPS:
         ✘ Should we use bytearray rather than byte strings? @cancelled (17-07-14 16:13)
             it would actually be the same speed as using bytearray since were not appending to an existing byte string. Were just reading byte strings from a file. The byte string would have to be converted to a bytearray anyway so it's probably faster to just use the byte string. We'll use a bytearray in the future if we need to mutate it (like sending commands)
             We can't use numpy.fromfile because the frame structure isn't known until we get the header of the frame.
+        ✔ make useful functions outside of reader static @done (Thu Aug-10-17 15:55)
         tests:
             ☐ test header structure @created(17-07-11 15:23)
                 to do this we need to have our own canned binary string and just test that we can pull out elements. also need a canned config file
