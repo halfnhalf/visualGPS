@@ -39,9 +39,9 @@ class HeaderView(Frame):
     def _next_frame(self):
         self.gps_controller.get_frame()
         self.header_list.options = self._convert_dict_to_options(self.gps_controller.reader.header_structure)
-        self.payload_list.options = [(self.gps_controller.parser.message_enum, 0)]
+        self.payload_list.options = [(self.gps_controller.parser.current_frame["message_enum"], 0)]
         self.frame_count_list.options = [(str(self.gps_controller.parser.frame_count), 0)]
-        self.payload_data.options = [(str(self.gps_controller.parser.payload_data["#ofobservers"]), 0)]
+        self.payload_data.options = self._convert_dict_to_options(self.gps_controller.parser.current_frame["payload_data"])
 
     def _convert_dict_to_options(self, dict):
         list_items = dict.items()

@@ -95,3 +95,18 @@ payload:
     973:
       name: raw_sbas_subframe
       fields:
+        decode_num:
+          offset: 0
+          size: 4
+          encode: int
+        prn:
+          offset: 4
+          size: 4
+          encode: int
+        subframe_id:
+          offset: 8
+          size: 4
+          encode: int
+        data:
+          offset: 12
+          size: 32
