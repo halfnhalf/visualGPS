@@ -110,3 +110,58 @@ payload:
         data:
           offset: 12
           size: 32
+    1306:
+      name: unknown
+      fields:
+        unkown:
+          offset: 0
+          size: 0
+    25:
+      name: raw_gps_subframe
+      fields:
+        decode_num:
+          offset: 0
+          size: 4
+          encode: int
+        prn:
+          offset: 4
+          size: 4
+          encode: int
+        subframe_id:
+          offset: 8
+          size: 4
+          encode: int
+        data:
+          offset: 12
+          size: 32
+        chan:
+          offset: 44
+          size: 4
+          encode: int
+        crc:
+          offset: 48
+          size: 4
+    41:
+      name: raw_ephem
+      fields:
+        prn:
+          offset: 0
+          size: 4
+        ref_week:
+          offset: 4
+          size: 4
+        ref_secs:
+          offset: 8
+          size: 4
+        subframe_1:
+          offset: 12
+          size: 30
+        subframe_2:
+          offset: 42
+          size: 30
+        subframe_3:
+          offset: 72
+          size: 30
+        crc:
+          offset: 102
+          size: 4
