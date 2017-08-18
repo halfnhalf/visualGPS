@@ -1,6 +1,5 @@
 import yaml
-import sys
-from visualGPS.reader import Reader,_CONFIG_SIZE_KEY, _CONFIG_NAME_KEY, _SYNC_BYTES_KEY, _ENCODE_KEY 
+from visualGPS.reader import Reader, _CONFIG_NAME_KEY
 from abc import abstractmethod
 
 _PAYLOAD_KEY = "payload"

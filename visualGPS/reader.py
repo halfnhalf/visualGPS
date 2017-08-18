@@ -32,7 +32,7 @@ class Reader():
 
     def digest_frame_header(self, frame_data):
         for field in self.content:
-            self.header_structure[field[_CONFIG_NAME_KEY]] = Reader.get_field_data(field, frame_data)
+            self.header_structure[field[_CONFIG_NAME_KEY]] = self.get_field_data(field, frame_data)
 
     @staticmethod
     def get_field_data(field, frame_data):

@@ -1,1 +1,2 @@
+asciimatics==1.8.0
 PyYAML==3.12
