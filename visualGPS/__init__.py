@@ -6,8 +6,9 @@ class VisualGPS():
         self.configfile = configfile
         self.reader = None
         self.parser = None
+        self.datafile = None
     
-    def add_datafile(self, datafile):
+    def add_data_or_port(self, datafile):
         self.datafile = datafile
 
     def register(self, ClassName):

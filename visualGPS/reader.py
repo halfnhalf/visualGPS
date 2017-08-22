@@ -110,3 +110,25 @@ class FileReaderController(Reader):
             else:
                 num_sync_bytes_found = 0
             bytes_read = self.binary_file.read(1)
+
+
+import serial
+class SerialReaderController(Reader):
+    """
+    this class is used to read data from a serial connection
+    """
+
+    def __init__(self, tty, configfile):
+        """
+        :param tty: the tty absolute path to read our serial connection from
+        :param configfile: the configfile absolute path
+        """
+
+        super(SerialReaderController, self).__init__(configfile)
+        self.tty = tty
+
+        self.port = serial.Serial(tty)
+        assert self.port.is_open
+
+    def get_frame(self):
+        pass
