@@ -8,7 +8,7 @@ from visualGPS.interface import start_tui
 def main():
     dir = os.path.dirname(__file__)
     config = os.path.join(dir, 'config', 'config.yml')
-    datafile = os.path.join(dir, 'data', '1950_5_01_L627_OMNI_0.GPS')
+    datafile = os.path.join(dir, 'data', 'com.log')
 
     gps = VisualGPS(config)
     gps.add_data_or_port(datafile)

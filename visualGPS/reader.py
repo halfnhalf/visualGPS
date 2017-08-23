@@ -80,15 +80,19 @@ class FileReaderController(Reader):
         Get frames iteratively, one at a time
         """
         with open(self.filename, "rb") as self.binary_file:
-            start_of_frame = self._seek_next_sync_bytes_pos(self.current_frame_pos)
-            end_of_frame = self._seek_next_sync_bytes_pos(start_of_frame+self.num_sync_bytes)
-            self.binary_file.seek(start_of_frame)
-            self.current_frame_pos = end_of_frame
-            frame = self.binary_file.read(end_of_frame-start_of_frame)
+            try:
+                start_of_frame = self._seek_next_sync_bytes_pos(self.current_frame_pos)
+                end_of_frame = self._seek_next_sync_bytes_pos(start_of_frame+self.num_sync_bytes)
+                self.binary_file.seek(start_of_frame)
+                self.current_frame_pos = end_of_frame
+                frame = self.binary_file.read(end_of_frame-start_of_frame)
 
-            self.digest_frame_header(frame)
+                self.digest_frame_header(frame)
 
-            return frame
+                return frame
+            except TypeError:
+                print("No sync bytes found.")
+                raise
 
     def _seek_next_sync_bytes_pos(self, start_position):
         """
