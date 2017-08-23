@@ -11,9 +11,9 @@ def main():
     datafile = os.path.join(dir, 'data', '1950_5_01_L627_OMNI_0.GPS')
 
     gps = VisualGPS(config)
-    gps.add_data_or_port('/dev/ttyS0')
+    gps.add_data_or_port(datafile)
     gps.register(ProPak6)
-    gps.register(SerialReaderController)
+    gps.register(FileReaderController)
 
 #    while True:
 #        input("press a key to get next frame")
