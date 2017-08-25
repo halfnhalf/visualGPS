@@ -37,17 +37,21 @@ class ProPak6(Parser):
         self.message_enum = "None"
 
     def parse_frame(self, frame, header_structure):
-        message_id = header_structure[_MESSAGE_ID_KEY]
         self.current_frame = {}
-        self.current_frame["message_enum"] = self.messages[message_id][_CONFIG_NAME_KEY]
-        self.current_frame["payload_size"] = header_structure[self.payload_size_header_key]
-
-        payload = frame[self.payload_offset:self.payload_offset+self.current_frame["payload_size"]]
-        this_message_config = self.messages[message_id]
-
         self.current_frame["payload_data"] = {}
-        for field_name_key, field in this_message_config[_MESSAGE_FIELD_KEY].items():
-            self.current_frame["payload_data"][field_name_key] = Reader.get_field_data(field, payload)
+        message_id = header_structure[_MESSAGE_ID_KEY]
+        self.current_frame["payload_size"] = header_structure[self.payload_size_header_key]
+        payload = frame[self.payload_offset:self.payload_offset+self.current_frame["payload_size"]]
+
+        try:
+            self.current_frame["message_enum"] = self.messages[message_id][_CONFIG_NAME_KEY]
+            this_message_config = self.messages[message_id]
+
+            for field_name_key, field in this_message_config[_MESSAGE_FIELD_KEY].items():
+                self.current_frame["payload_data"][field_name_key] = Reader.get_field_data(field, payload)
+        except KeyError:
+            self.current_frame["message_enum"] = str(message_id)
+            self.current_frame["payload_data"]["unknown_message"] = "unknown message"
 
         #if message_id == 43:
         #    self.payload_data["#ofobservers"] = 0

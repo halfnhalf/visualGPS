@@ -44,6 +44,7 @@ visualGPS:
                         ✔ finally got the data for this config adding it now @created(Wed Aug-23-17 16:44) @started(Wed Aug-23-17 16:44) @done (Wed Aug-23-17 16:53) @lasted(0:09)
                     ✔ 41 rawephm @created(Wed Jul-26-17 19:25) @done (Mon Aug-14-17 14:08)
                         ✔ add this to config @done (Mon Aug-14-17 14:08)
+                    ☐ figure out what to do if a config message doesn't exist @created(Fri Aug-25-17 17:58) @started(Fri Aug-25-17 17:58)
                 ☐ decide what realtime data is important and needs to be aggregated @created(Wed Jul-26-17 19:58)
                     such as ranging data or whatever
                 ☐ move the important information to display to the super class @created(Wed Jul-26-17 20:00)
@@ -64,7 +65,7 @@ visualGPS:
                 It's a low baudrate so we should be fine
             ☐ create com reader class and get basic com data into it @created(Thu Aug-17-17 18:29) @started(Tue Aug-22-17 17:44)
                 ☐ implement get frame @created(Tue Aug-22-17 17:44) @started(Tue Aug-22-17 17:44) @toggle(Wed Aug-23-17 16:29)
-                ☐ make sure the monitor is outputing in binary mode @created(Wed Aug-23-17 16:29) @started(Wed Aug-23-17 16:29) @toggle(Wed Aug-23-17 16:45) @toggle(Wed Aug-23-17 16:54)
+                ☐ make sure the monitor is outputing in binary mode @created(Wed Aug-23-17 16:29) @started(Wed Aug-23-17 16:29) @toggle(Wed Aug-23-17 16:45) @toggle(Wed Aug-23-17 16:54) @toggle(Wed Aug-23-17 18:15) @toggle(Thu Aug-24-17 15:25) @toggle(Fri Aug-25-17 17:58)
         ✔ implement header structure into reader @created(17-07-10 16:46) @done (17-07-11 14:34)
             we're removing the header structure from the parser since it makes more sense to be in the reader as the reader is static
         ✔ implement header structure parser @done (17-07-11 14:43)
