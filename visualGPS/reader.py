@@ -54,6 +54,27 @@ class Reader():
 
         return decoded_data
 
+    def _seek_next_sync_bytes_pos(self, start_position):
+        """
+        this function requires a file stream to already be opened as
+        self.binary_file
+
+        seek and return the start of the next consecutive sync bytes
+        """
+
+        self.binary_file.seek(start_position)
+        bytes_read = self.binary_file.read(1)
+        num_sync_bytes_found = 0
+
+        while bytes_read != b'':
+            if bytes_read == self.sync_bytes_list[num_sync_bytes_found]:
+                num_sync_bytes_found += 1
+                if num_sync_bytes_found == self.num_sync_bytes:
+                    return self.binary_file.tell()-self.num_sync_bytes
+            else:
+                num_sync_bytes_found = 0
+            bytes_read = self.binary_file.read(1)
+
     @abstractmethod
     def get_frame(self):
         raise NotImplementedError()
@@ -94,26 +115,6 @@ class FileReaderController(Reader):
                 print("No sync bytes found.")
                 raise
 
-    def _seek_next_sync_bytes_pos(self, start_position):
-        """
-        this function requires a file stream to already be opened as
-        self.binary_file
-
-        seek and return the start of the next consecutive sync bytes
-        """
-
-        self.binary_file.seek(start_position)
-        bytes_read = self.binary_file.read(1)
-        num_sync_bytes_found = 0
-
-        while bytes_read != b'':
-            if bytes_read == self.sync_bytes_list[num_sync_bytes_found]:
-                num_sync_bytes_found += 1
-                if num_sync_bytes_found == self.num_sync_bytes:
-                    return self.binary_file.tell()-self.num_sync_bytes
-            else:
-                num_sync_bytes_found = 0
-            bytes_read = self.binary_file.read(1)
 
 
 import serial
@@ -135,4 +136,8 @@ class SerialReaderController(Reader):
         assert self.port.is_open
 
     def get_frame(self):
-        pass
+        num_sets_of_sync_bytes = 0
+        buffer = self.port.read(9600)
+
+        while not num_sync_bytes_found == 2:
+

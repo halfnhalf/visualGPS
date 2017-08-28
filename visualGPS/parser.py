@@ -39,9 +39,10 @@ class ProPak6(Parser):
     def parse_frame(self, frame, header_structure):
         self.current_frame = {}
         self.current_frame["payload_data"] = {}
-        message_id = header_structure[_MESSAGE_ID_KEY]
         self.current_frame["payload_size"] = header_structure[self.payload_size_header_key]
+        self.current_frame["message_enum"] = ""
         payload = frame[self.payload_offset:self.payload_offset+self.current_frame["payload_size"]]
+        message_id = header_structure[_MESSAGE_ID_KEY]
 
         try:
             self.current_frame["message_enum"] = self.messages[message_id][_CONFIG_NAME_KEY]
@@ -50,6 +51,10 @@ class ProPak6(Parser):
             for field_name_key, field in this_message_config[_MESSAGE_FIELD_KEY].items():
                 self.current_frame["payload_data"][field_name_key] = Reader.get_field_data(field, payload)
         except KeyError:
+            """
+            the message id is not in our config or a there is a missing field.
+            eventually this will have nice popup errors with more information
+            """
             self.current_frame["message_enum"] = str(message_id)
             self.current_frame["payload_data"]["unknown_message"] = "unknown message"
 
