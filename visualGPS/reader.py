@@ -54,6 +54,46 @@ class Reader():
 
         return decoded_data
 
+    @abstractmethod
+    def get_frame(self):
+        raise NotImplementedError()
+
+
+class FileReaderController(Reader):
+    """
+    This class is used to read binary gps data from a file
+    and deliver frames
+    """
+
+    def __init__(self, filename, configfile):
+        """
+        FileReaderController
+
+        :param filename: filename absolute path that you want to digest
+        :param configfile: the configfile absolute path
+        """
+        super(FileReaderController, self).__init__(configfile)
+        self.binary_file = open(filename, "rb")
+
+    def get_frame(self):
+        """
+        Get frames iteratively, one at a time
+        """
+        try:
+            start_of_frame = self._seek_next_sync_bytes_pos(self.current_frame_pos)
+            end_of_frame = self._seek_next_sync_bytes_pos(start_of_frame+self.num_sync_bytes)
+            self.binary_file.seek(start_of_frame)
+            self.current_frame_pos = end_of_frame
+            frame = self.binary_file.read(end_of_frame-start_of_frame)
+
+            self.digest_frame_header(frame)
+
+            return frame
+
+        except TypeError:
+            print("No sync bytes found.")
+            raise
+
     def _seek_next_sync_bytes_pos(self, start_position):
         """
         this function requires a file stream to already be opened as
@@ -75,47 +115,6 @@ class Reader():
                 num_sync_bytes_found = 0
             bytes_read = self.binary_file.read(1)
 
-    @abstractmethod
-    def get_frame(self):
-        raise NotImplementedError()
-
-
-class FileReaderController(Reader):
-    """
-    This class is used to read binary gps data from a file
-    and deliver frames
-    """
-
-    def __init__(self, filename, configfile):
-        """
-        FileReaderController
-
-        :param filename: filename absolute path that you want to digest
-        :param configfile: the configfile absolute path
-        """
-        super(FileReaderController, self).__init__(configfile)
-        self.filename = filename
-
-    def get_frame(self):
-        """
-        Get frames iteratively, one at a time
-        """
-        with open(self.filename, "rb") as self.binary_file:
-            try:
-                start_of_frame = self._seek_next_sync_bytes_pos(self.current_frame_pos)
-                end_of_frame = self._seek_next_sync_bytes_pos(start_of_frame+self.num_sync_bytes)
-                self.binary_file.seek(start_of_frame)
-                self.current_frame_pos = end_of_frame
-                frame = self.binary_file.read(end_of_frame-start_of_frame)
-
-                self.digest_frame_header(frame)
-
-                return frame
-            except TypeError:
-                print("No sync bytes found.")
-                raise
-
-
 
 import serial
 class SerialReaderController(Reader):
@@ -131,13 +130,43 @@ class SerialReaderController(Reader):
 
         super(SerialReaderController, self).__init__(configfile)
         self.tty = tty
+        self.port_buffer = 100
 
         self.port = serial.Serial(tty)
         assert self.port.is_open
 
     def get_frame(self):
-        num_sets_of_sync_bytes = 0
-        buffer = self.port.read(9600)
+        found_first_sync = False
+        found_second_sync = False
+        buffer = self.port.read(self.port_buffer)
+        (start_of_frame, found_first_sync) = self._seek_next_sync_bytes_pos(buffer, 0)
 
-        while not num_sync_bytes_found == 2:
+        while not found_first_sync:
+            buffer = self.port.read(self.port_buffer)
+            (start_of_frame, found_first_sync) = self._seek_next_sync_bytes_pos(buffer, 0)
 
+        (end_of_frame, found_second_sync) = self._seek_next_sync_bytes_pos(buffer, start_of_frame+self.num_sync_bytes)
+        while not found_second_sync:
+            buffer = buffer + self.port.read(self.port_buffer)
+            (end_of_frame, found_second_sync) = self._seek_next_sync_bytes_pos(buffer, 0)
+
+        frame = buffer[start_of_frame:end_of_frame]
+        self.digest_frame_header(frame)
+
+        return buffer[start_of_frame:end_of_frame]
+
+    def _seek_next_sync_bytes_pos(self, buffer, start_position):
+        """
+        :return : tuple (position, did we find sync?)
+        """
+        num_sync_bytes_found = 0
+
+        for pos in range(len(buffer[start_position:])):
+            byte = buffer[pos:pos+1]
+            if byte == self.sync_bytes_list[num_sync_bytes_found]:
+                num_sync_bytes_found += 1
+                if num_sync_bytes_found == self.num_sync_bytes:
+                    return (pos+start_position-self.num_sync_bytes, True)
+            else:
+                num_sync_bytes_found = 0
+        return (0, False)

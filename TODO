@@ -67,7 +67,9 @@ visualGPS:
             ✔ make sure we can read serial data fast enough @created(Fri Aug-11-17 15:14) @done (Tue Aug-22-17 17:43)
                 It's a low baudrate so we should be fine
             ☐ create com reader class and get basic com data into it @created(Thu Aug-17-17 18:29) @started(Tue Aug-22-17 17:44)
-                ☐ implement get frame @created(Tue Aug-22-17 17:44) @started(Tue Aug-22-17 17:44) @toggle(Wed Aug-23-17 16:29)
+                ☐ implement get frame @created(Tue Aug-22-17 17:44) @started(Tue Aug-22-17 17:44) @toggle(Wed Aug-23-17 16:29) @toggle(Mon Aug-28-17 16:43) @toggle(Mon Aug-28-17 17:44) @toggle(Tue Aug-29-17 12:11)
+                    ☐ implement seek_next_bytes_pos @created(Tue Aug-29-17 14:19) @started(Tue Aug-29-17 14:19)
+                    ✘ move _seek_next_sync_bytes_pos to parent class and accept any buffer of data @created(Mon Aug-28-17 17:44) @started(Tue Aug-29-17 12:12) @cancelled (Tue Aug-29-17 13:17) @wasted(1:05)
                 ✔ make sure the monitor is outputing in binary mode @created(Wed Aug-23-17 16:29) @started(Wed Aug-23-17 16:29) @toggle(Wed Aug-23-17 16:45) @toggle(Wed Aug-23-17 16:54) @toggle(Wed Aug-23-17 18:15) @toggle(Thu Aug-24-17 15:25) @toggle(Fri Aug-25-17 17:58) @done (Mon Aug-28-17 14:00) @lasted(1 day, 4:10)
                     for now we're going to just use the junk com data and make up some sync bytes.
                     scratch that it works with normal sync bytes but serialpy must be defaulting to a slower baudrate. We can change that later
