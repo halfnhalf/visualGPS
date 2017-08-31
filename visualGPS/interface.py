@@ -4,6 +4,7 @@ from asciimatics.scene import Scene
 from asciimatics.exceptions import ResizeScreenError, NextScene
 from collections import defaultdict
 import sys
+import time
 
 last_scene = None
 
@@ -14,6 +15,7 @@ class HeaderView(Frame):
         self.layout = Layout([100], fill_frame=True)
         self.add_layout(self.layout)
         self.header_height = len(self.gps_controller.reader.header_structure)
+        self.screen = screen
 
         self.message_enum = self.gps_controller.parser.current_frame["message_enum"]
         self.payload_data = self.gps_controller.parser.current_frame["payload_data"]

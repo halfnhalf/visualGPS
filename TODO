@@ -66,13 +66,17 @@ visualGPS:
                 ✔ figure out why the serial port is already open @created(Tue Aug-22-17 14:23) @started(Tue Aug-22-17 14:23) @done (Tue Aug-22-17 14:25) @lasted(0:02)
             ✔ make sure we can read serial data fast enough @created(Fri Aug-11-17 15:14) @done (Tue Aug-22-17 17:43)
                 It's a low baudrate so we should be fine
-            ☐ create com reader class and get basic com data into it @created(Thu Aug-17-17 18:29) @started(Tue Aug-22-17 17:44)
-                ☐ implement get frame @created(Tue Aug-22-17 17:44) @started(Tue Aug-22-17 17:44) @toggle(Wed Aug-23-17 16:29) @toggle(Mon Aug-28-17 16:43) @toggle(Mon Aug-28-17 17:44) @toggle(Tue Aug-29-17 12:11)
-                    ☐ implement seek_next_bytes_pos @created(Tue Aug-29-17 14:19) @started(Tue Aug-29-17 14:19)
+            ✔ create com reader class and get basic com data into it @created(Thu Aug-17-17 18:29) @started(Tue Aug-22-17 17:44) @done (Thu Aug-31-17 15:15) @lasted(8 days, 21:31)
+                ✔ implement get frame @created(Tue Aug-22-17 17:44) @started(Tue Aug-22-17 17:44) @toggle(Wed Aug-23-17 16:29) @toggle(Mon Aug-28-17 16:43) @toggle(Mon Aug-28-17 17:44) @toggle(Tue Aug-29-17 12:11) @done (Thu Aug-31-17 15:15) @lasted(3 days, 2:50)
+                    ✔ implement seek_next_bytes_pos @created(Tue Aug-29-17 14:19) @started(Tue Aug-29-17 14:19) @done (Thu Aug-31-17 15:15) @lasted(2 days, 0:56)
                     ✘ move _seek_next_sync_bytes_pos to parent class and accept any buffer of data @created(Mon Aug-28-17 17:44) @started(Tue Aug-29-17 12:12) @cancelled (Tue Aug-29-17 13:17) @wasted(1:05)
                 ✔ make sure the monitor is outputing in binary mode @created(Wed Aug-23-17 16:29) @started(Wed Aug-23-17 16:29) @toggle(Wed Aug-23-17 16:45) @toggle(Wed Aug-23-17 16:54) @toggle(Wed Aug-23-17 18:15) @toggle(Thu Aug-24-17 15:25) @toggle(Fri Aug-25-17 17:58) @done (Mon Aug-28-17 14:00) @lasted(1 day, 4:10)
                     for now we're going to just use the junk com data and make up some sync bytes.
                     scratch that it works with normal sync bytes but serialpy must be defaulting to a slower baudrate. We can change that later
+            ☐ implement realtime data display @created(Thu Aug-31-17 15:15) @started(Thu Aug-31-17 15:15)
+                ☐ figure out how asciimatics branches function calls @created(Thu Aug-31-17 17:21) @started(Thu Aug-31-17 17:24)
+                ✔ figure out if the pipe is always filling with a backlog @created(Thu Aug-31-17 17:21) @started(Thu Aug-31-17 17:21) @done (Thu Aug-31-17 17:24) @lasted(0:03)
+                    yes pyserial never stops filling with data so we need to reinitialize the pipe every frame
         ✔ implement header structure into reader @created(17-07-10 16:46) @done (17-07-11 14:34)
             we're removing the header structure from the parser since it makes more sense to be in the reader as the reader is static
         ✔ implement header structure parser @done (17-07-11 14:43)

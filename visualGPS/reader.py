@@ -132,12 +132,13 @@ class SerialReaderController(Reader):
         self.tty = tty
         self.port_buffer = 100
 
-        self.port = serial.Serial(tty)
-        assert self.port.is_open
 
     def get_frame(self):
         found_first_sync = False
         found_second_sync = False
+
+        self.port = serial.Serial(self.tty)
+        assert self.port.is_open
         buffer = self.port.read(self.port_buffer)
         (start_of_frame, found_first_sync) = self._seek_next_sync_bytes_pos(buffer, 0)
 
@@ -148,7 +149,7 @@ class SerialReaderController(Reader):
         (end_of_frame, found_second_sync) = self._seek_next_sync_bytes_pos(buffer, start_of_frame+self.num_sync_bytes)
         while not found_second_sync:
             buffer = buffer + self.port.read(self.port_buffer)
-            (end_of_frame, found_second_sync) = self._seek_next_sync_bytes_pos(buffer, 0)
+            (end_of_frame, found_second_sync) = self._seek_next_sync_bytes_pos(buffer, start_of_frame+self.num_sync_bytes)
 
         frame = buffer[start_of_frame:end_of_frame]
         self.digest_frame_header(frame)
@@ -166,7 +167,7 @@ class SerialReaderController(Reader):
             if byte == self.sync_bytes_list[num_sync_bytes_found]:
                 num_sync_bytes_found += 1
                 if num_sync_bytes_found == self.num_sync_bytes:
-                    return (pos+start_position-self.num_sync_bytes, True)
+                    return (pos+1+start_position-self.num_sync_bytes, True)
             else:
                 num_sync_bytes_found = 0
         return (0, False)
