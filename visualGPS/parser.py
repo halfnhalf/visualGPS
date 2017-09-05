@@ -58,17 +58,4 @@ class ProPak6(Parser):
             self.current_frame["message_enum"] = str(message_id)
             self.current_frame["payload_data"]["unknown_message"] = "unknown message"
 
-        #if message_id == 43:
-        #    self.payload_data["#ofobservers"] = 0
-        #elif message_id == 25:
-        #    self.message_enum = "raw gps subframe"
-        #elif message_id == 973:
-        #    self.message_enum = "raw sbas subframe"
-        #elif message_id == 1306:
-        #    self.message_enum = "unkown"
-        #elif message_id == 41:
-        #    self.message_enum = "raw ephemeris data"
-        #else:
-        #    self.message_enum = "None"
-
         self.frame_count += 1

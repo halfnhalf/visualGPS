@@ -49,7 +49,8 @@ class Reader():
     @staticmethod
     def _decode_field_data(field_data, encode):
         decoded_data = {
-            'int': lambda x: int.from_bytes(x, byteorder=sys.byteorder)
+            'int': lambda x: int.from_bytes(x, byteorder=sys.byteorder),
+            'Bool': lambda x: "False" if int.from_bytes(x, byteorder=sys.byteorder) == 0 else "True"
         }[encode](field_data)
 
         return decoded_data

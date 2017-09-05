@@ -1,4 +1,4 @@
-from asciimatics.widgets import Layout, Frame, Divider, Button, ListBox, Label
+from asciimatics.widgets import Layout, Frame, Divider, Button, ListBox, Label, Widget
 from asciimatics.screen import Screen
 from asciimatics.scene import Scene
 from asciimatics.exceptions import ResizeScreenError, NextScene
@@ -32,7 +32,7 @@ class HeaderView(Frame):
         self.frame_count_list = ListBox(1, [(str(self.gps_controller.parser.frame_count), 0)])
         self.frame_count_list.disabled = True
 
-        self.payload_data = ListBox(len(self.payload_data), self._convert_dict_to_options(self.payload_data))
+        self.payload_data = ListBox(Widget.FILL_FRAME, self._convert_dict_to_options(self.payload_data))
         self.payload_data.disabled = True
 
         self.layout.add_widget(self.header_label)
@@ -66,7 +66,6 @@ class HeaderView(Frame):
 
     def _real_time(self):
         while(True):
-            time.sleep(.5)
             self.gps_controller.get_frame()
             self.header_list.options = self._convert_dict_to_options(self.gps_controller.reader.header_structure)
             self.payload_list.options = [(self.gps_controller.parser.current_frame["message_enum"], 0)]

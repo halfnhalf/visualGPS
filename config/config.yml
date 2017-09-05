@@ -199,3 +199,58 @@ payload:
         crc:
           offset: 102
           size: 4
+    47:
+      name: psrpos
+      fields:
+        sol_status:
+          offset: 0
+          size: 4
+    48:
+      name: satvis
+      fields:
+        sat_vis:
+          offset: 0
+          size: 4
+          encode: Bool
+        comp_alm:
+          offset: 4
+          size: 4
+        sat_num:
+          offset: 8
+          size: 4
+        prn:
+          offset: 12
+          size: 2
+        glofreq:
+          offset: 14
+          size: 2
+        health:
+          offset: 16
+          size: 4
+        elev:
+          offset: 20
+          size: 8
+        az:
+          offset: 28
+          size: 8
+        true_dop:
+          offset: 36
+          size: 8
+        app_dop:
+          offset: 44
+          size: 8
+    83:
+      name: trackstat
+      fields:
+        sol_status:
+          offset: 0
+          size: 4
+        pos_type:
+          offset: 4
+          size: 4
+        cutoff:
+          offset: 8
+          size: 4
+        num_chans:
+          offset: 12
+          size: 4
