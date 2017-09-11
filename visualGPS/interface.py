@@ -7,8 +7,6 @@ import sys
 import _thread
 import time
 
-last_scene = None
-
 class HeaderView(Frame):
     def __init__(self, screen, gps_controller):
         super(HeaderView, self).__init__(screen, screen.height * 2 // 3, screen.width * 2 // 3, title="Visual GPS")
@@ -84,13 +82,3 @@ def build_header_view(screen, scene, gps_controller):
         Scene([HeaderView(screen, gps_controller)], -1, name="Header")
     ]
     screen.play(scenes, start_scene=scene)
-
-
-def start_tui(gps_controller):
-    global last_scene
-    while True:
-        try:
-            Screen.wrapper(build_header_view, arguments=[last_scene, gps_controller])
-            sys.exit(0)
-        except ResizeScreenError as e:
-            last_scene = e.scene

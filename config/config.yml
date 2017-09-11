@@ -254,3 +254,6 @@ payload:
         num_chans:
           offset: 12
           size: 4
+        num_chans:
+          offset: 16
+          size: 4

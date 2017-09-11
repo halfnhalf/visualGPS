@@ -48,11 +48,12 @@ visualGPS:
                     ☐ 48 @created(Mon Aug-28-17 14:01)
                     ☐ 47 @created(Mon Aug-28-17 14:01)
                     ☐ 83 @created(Mon Aug-28-17 14:01)
-                ☐ decide what realtime data is important and needs to be aggregated @created(Wed Jul-26-17 19:58)
+                ✔ decide what realtime data is important and needs to be aggregated @created(Wed Jul-26-17 19:58) @done (Mon Sep-11-17 14:55)
                     such as ranging data or whatever
+                    going to graph c/no of range data
                 ☐ move the important information to display to the super class @created(Wed Jul-26-17 20:00)
                     we need the overall super parser to aggregate the data from individual frames
-                ☐ find a simpler way to read updated data from the parser when new frames are loaded. @created(Fri Aug-11-17 15:15)
+                ✘ find a simpler way to read updated data from the parser when new frames are loaded. @created(Fri Aug-11-17 15:15) @cancelled (Mon Sep-11-17 14:55)
                 ☐ Check CRC @created(Mon Aug-14-17 14:09)
             ✔ implement message structure when instantiating a new parser from the config file @created(Wed Aug-02-17 16:47) @started(Wed Aug-02-17 16:47) @done (Fri Aug-11-17 15:13) @lasted(8 days, 22:26)
             ✔ i don't like initiating the parser object with header structure because we would need a new one each frame. @created(17-07-12 15:05) @started(17-07-12 15:26) @done (17-07-12 18:17) @lasted(2:51)
@@ -107,7 +108,7 @@ visualGPS:
             there's ncurses, curses, uriwd, asciimatics
             asciimatics uses layouts and widgets but ncurses and urwid is procedural so we'll use asciimatics
             unfortunately it looks like asciimatics is kind of slow @created(Wed Jul-26-17 19:27)
-        ☐ display header structure @created(17-07-17 13:57) @started(17-07-18 15:49) @toggle(17-07-21 17:14) @toggle(17-07-24 12:15)
+        ✔ display header structure @created(17-07-17 13:57) @started(17-07-18 15:49) @toggle(17-07-21 17:14) @toggle(17-07-24 12:15) @done (Mon Sep-11-17 14:54)
             we'll start with just a window of fields to display header structure
             ✔ figure out how to initialize a window and display text @created(17-07-24 12:15) @started(17-07-24 12:15) @done (17-07-25 15:00) @lasted(1 day, 2:45)
                 ✔ solve 2 parameters bug @created(17-07-24 19:03) @started(17-07-24 19:04) @done (17-07-25 15:00) @lasted(19:56)
@@ -115,7 +116,7 @@ visualGPS:
                 we'll probably just pass the visualgps ioc container
             ✔ display the information @created(17-07-25 15:01) @started(Wed Jul-26-17 16:24) @done (Wed Jul-26-17 18:48) @lasted(2:24)  
                 ✔ we need to create enumerated tuples of the header information @created(17-07-26 16:24) @started(Wed Jul-26-17 16:24) @done (Wed Jul-26-17 18:48) @lasted(2:24)
-            ☐ make it pretty @created(17-07-25 15:01)
+            ✔ make it pretty @created(17-07-25 15:01) @done (Mon Sep-11-17 14:54)
             ✔ add buttons to get the next frame @created(17-07-25 15:01) @done (Wed Jul-26-17 18:48)
                 ✔ figure out how to update the display @created(17-07-25 17:00) @started(17-07-26 15:19) @toggle(17-07-26 16:24) @toggle(Wed Jul-26-17 18:49) @done (Wed Jul-26-17 18:49)
                 ✔ need a new color scheme @created(Fri Aug-11-17 15:16) @done (Thu Aug-17-17 18:27)
@@ -133,3 +134,9 @@ visualGPS:
             This is done with self.screen.force_update()
         ☐ work on resizing the tables when larger data comes in after the screen is drawn @created(Fri Sep-01-17 14:31)
         ☐ work on resizing the screen when the user resizes the terminal @created(Fri Sep-01-17 14:31)
+        ☐ add scroll bars and dynamic sizing of list boxes @created(Tue Sep-05-17 18:29)
+        ✔ add second view and tabbing @created(Thu Sep-07-17 13:23) @started(Thu Sep-07-17 13:23) @done (Mon Sep-11-17 14:53) @lasted(4 days, 1:30)
+            figured out how to use raise nextscene in conjunction with buttons.
+        ☐ add popup for graphing c/no @created(Tue Sep-05-17 18:29)
+            suggested by swen
+        ☐ on second view figure out hot to create a rolling line graph for graphing frame values over time. @created(Mon Sep-11-17 14:56) @started(Mon Sep-11-17 14:56)
