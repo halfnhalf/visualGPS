@@ -137,6 +137,9 @@ visualGPS:
         ☐ add scroll bars and dynamic sizing of list boxes @created(Tue Sep-05-17 18:29)
         ✔ add second view and tabbing @created(Thu Sep-07-17 13:23) @started(Thu Sep-07-17 13:23) @done (Mon Sep-11-17 14:53) @lasted(4 days, 1:30)
             figured out how to use raise nextscene in conjunction with buttons.
-        ☐ add popup for graphing c/no @created(Tue Sep-05-17 18:29)
-            suggested by swen
-        ☐ on second view figure out hot to create a rolling line graph for graphing frame values over time. @created(Mon Sep-11-17 14:56) @started(Mon Sep-11-17 14:56)
+        ✔ add view for graphing c/no @created(Tue Sep-05-17 18:29) @done (Tue Sep-19-17 18:34)
+            suggested by swen. This is done with a separate scene and a custom effect or widget
+            ☐ on second view figure out hot to create a rolling line graph for graphing frame values over time. @created(Mon Sep-11-17 14:56) @started(Mon Sep-11-17 14:56)
+                ☐ decide on whether to use a custom widget or effect @created(Tue Sep-19-17 18:34)
+                    ☐ if using a widget we need to figure out how to get something like barchart into a custom widget. There seems to be a better api for developing custom widgets @created(Tue Sep-19-17 18:34)
+                    ☐ doing a custom effect may be easier since we don't have to worry about update() being called and redrawing our widget but a dynamic renderer will also be more involved @created(Tue Sep-19-17 18:35)
